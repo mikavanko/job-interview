@@ -69,19 +69,19 @@
     data () {
       return {
         items,
-        deleted: []
+        deleted: [],
       }
     },
     computed: {
-      count () {
+      count (val) {
         return this.items.length
-      }
+      },
     },
     methods: {
       deleteItem () {
-        this.deleted = _.remove(this.items, function (el) {
-          return el.rest === 0
-        })
+        this.deleted = this.items.filter(el => el.rest === 0)
+        this.items = this.items.filter(el => el.rest !== 0)
+        // this.deleted.forEach(el => this.items.splice(this.items.findIndex(e=>e.rest === 0),1)) // Еще можно так
       }
     }
   })
